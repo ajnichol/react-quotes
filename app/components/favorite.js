@@ -1,14 +1,14 @@
-var React = require("react");
+// var React = require("react");
 
-var API = require("../utils/API");
+// var API = require("../utils/API");
 
-var Favorite = React.createClass({
+// var Favorite = React.createClass({
 
-	getInitialState: function(){
-		return {favoritedQuotes: ""};
-	},
+// 	getInitialState: function(){
+// 		return {favoritedQuotes: ""};
+// 	},
 
-	componentDidMount: function(){
-		API.
-	}
-})
+// 	componentDidMount: function(){
+// 		API.
+// 	}
+// })
