@@ -4,8 +4,29 @@ var API = require("../utils/API");
 
 var Results = React.createClass({
 
-	handleClick: function(chosenQuote){
-    API.favoriteQuote(chosenQuote).then(function(){
+  getInitialState: function(){
+    return {dbQuotes: ""};
+  },
+
+  componentDidMount: function(){
+    API.getQuotes().then(function(allQuotes){
+      this.setState({dbQuotes: allQuotes});
+    }.bind(this));
+  },
+
+  handleDelete: function(destroyQuote){
+    var quoteId = destroyQuote._id;
+    API.deleteQuote(quoteId).then(function(){
+      console.log("quote deleted");
+      API.getQuotes().then(function(revisedQuotes){
+        this.setState({dbQuotes: revisedQuotes});
+        console.log("database quotes updated");
+      }.bind(this));
+    }.bind(this));
+  },
+
+	handleClick: function(favoriteQuote){
+    API.favoriteQuote(favoriteQuote).then(function(){
       console.log("favorited a quote");
     });
   },
@@ -27,14 +48,22 @@ var Results = React.createClass({
                 </div>
                 <div className="panel-body">
                   <ul className="list-group">
+                    <div>
+                      <li className="list-group-item">
+                        <em>{this.state.dbQuotes}</em>
+                      </li>
+                    </div>
                     <div key={index}>
                       <li className="list-group-item">
                         <h3>
                           <span>
+                            <button onClick = {() => this.handleClick(quote)}><i class="fa fa-star-o" aria-hidden="true"></i></button>
+                          </span>
+                          <span>
                             <em>{quote.text}</em>
                           </span>
                           <span className="btn-group pull-right">
-                            <button className="btn btn-primary" onClick= {() => this.handleClick(quote)}>Favorite</button>
+                            <button onClick = {() => this.handleDelete(quote)}><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                           </span>
                         </h3>
                       </li>
