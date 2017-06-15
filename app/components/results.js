@@ -4,14 +4,14 @@ var API = require("../utils/API");
 
 var Results = React.createClass({
 
-	handleClick: function(item){
-    API.favoriteQuote(item).then(function(){
+	handleClick: function(chosenQuote){
+    API.favoriteQuote(chosenQuote).then(function(){
       console.log("favorited a quote");
     });
   },
 
   render: function(){
-    return this.props.results.map(function(quote, index){
+    return this.props.results.docs.map(function(quote, index){
       return(
         <div className="main-container">
           <div className="row">

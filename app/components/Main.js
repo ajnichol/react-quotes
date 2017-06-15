@@ -17,7 +17,7 @@ var Main = React.createClass({
 
 	setQuote: function(quote){
 		API.saveQuote(quote).then(function(response){
-			this.setState({results: {doc: response}});
+			this.setState({results: {docs: response}});
 		}.bind(this));
 	},
 
@@ -49,8 +49,7 @@ var Main = React.createClass({
 	              <div className="collapse navbar-collapse navbar-ex1-collapse">
 	                <ul className="nav navbar-nav navbar-right">
 	                  {/* Using <Link> in place of <a> and "to" in place of "href" */}
-	                  <li><Link to="/search">Search</Link></li>
-	                  <li><Link to="/saved">Saved Quotes</Link></li>
+	                  <li><Link to="/favorite">Favorites</Link></li>
 	                </ul>
 	              </div>
 	            </div>
